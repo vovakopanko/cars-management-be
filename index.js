@@ -7,7 +7,7 @@ import apiRouter from "./routers/api/index.js";
 import cors from "cors";
 import errorMidleware from "./middleware/error-midleware.js";
 
-dotenv.config();
+dotenv.config({path: "./vars/.env"});
 
 const PORT = process.env.PORT || 5000;
 const BD_URL = process.env.BD_URL;
