@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import publicationsRouter from "./routers/publication/index.js";
 import apiRouter from "./routers/api/index.js";
 import cors from "cors";
+import errorMidleware from "./middleware/error-midleware.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/publications", publicationsRouter);
 app.use("/api", apiRouter);
+app.use(errorMidleware);
 
 const startServer = async () => {
   try {

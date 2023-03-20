@@ -11,19 +11,19 @@ class UsersController {
       });
       return res.json(userData);
     } catch (e) {
-      console.log(e.message);
+      next(e);
     }
   }
   async login(req, res, next) {
     try {
     } catch (e) {
-      console.log(e.message);
+      next(e);
     }
   }
   async logout(req, res, next) {
     try {
     } catch (e) {
-      console.log(e.message);
+      next(e);
     }
   }
   async activated(req, res, next) {
@@ -32,20 +32,20 @@ class UsersController {
       await userServise.activate(activationLink);
       return res.redirect("https://ya.ru");
     } catch (e) {
-      console.log(e.message);
+      next(e);
     }
   }
   async refresh(req, res, next) {
     try {
     } catch (e) {
-      console.log(e.message);
+      next(e);
     }
   }
   async getUser(req, res, next) {
     try {
       res.json(["123", "124"]);
     } catch (e) {
-      console.log(e.message);
+      next(e);
     }
   }
 }

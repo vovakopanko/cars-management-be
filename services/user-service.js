@@ -4,13 +4,14 @@ import bcrypt from "bcrypt";
 import tokenService from "./token-service.js";
 import UserDto from "../dtos/user-dto.js";
 import { v4 } from "uuid";
+import ApiErrors from "../exeptions/api-errors.js";
 
 class UserSevice {
   async registration(email, password) {
     const candidate = await userModel.findOne({ email });
     if (candidate) {
-      throw new Error(
-        `User with it ${email}  exists, please change your data and create new acc`
+      throw ApiErrors.BadRequest(
+        `User with it ${email} exists, please change your data and create new acc`
       );
     }
     const saltRounds = 3;
@@ -37,7 +38,7 @@ class UserSevice {
   async activate(activationLink) {
     const user = await userModel.findOne({ activationLink });
     if (!user) {
-      throw new Error("");
+      throw ApiErrors.BadRequest("");
     }
     user.isActivated = true;
     await user.save();
