@@ -1,6 +1,6 @@
 import userModel from "../models/user-model.js";
 import bcrypt from "bcrypt";
-import mailService from "./mail-service.js";
+// import mailService from "./mail-service.js";
 import tokenService from "./token-service.js";
 import UserDto from "../dtos/user-dto.js";
 import { v4 } from "uuid";
@@ -21,7 +21,10 @@ class UserSevice {
       password: hashPassword,
       activationLink,
     });
-    await mailService.sendActivationail(email, activationLink);
+    // await mailService.sendActivationMail(
+    //   email,
+    //   `${process.env.API_URL}/api/activate/${activationLink}`
+    // );
 
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
@@ -30,6 +33,14 @@ class UserSevice {
       ...tokens,
       user: userDto,
     };
+  }
+  async activate(activationLink) {
+    const user = await userModel.findOne({ activationLink });
+    if (!user) {
+      throw new Error("");
+    }
+    user.isActivated = true;
+    await user.save();
   }
 }
 

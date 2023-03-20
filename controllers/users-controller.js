@@ -28,6 +28,9 @@ class UsersController {
   }
   async activated(req, res, next) {
     try {
+      const activationLink = req.params.link;
+      await userServise.activate(activationLink);
+      return res.redirect("https://ya.ru");
     } catch (e) {
       console.log(e.message);
     }
