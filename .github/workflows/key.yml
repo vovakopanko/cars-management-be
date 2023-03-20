@@ -17,6 +17,6 @@ jobs:
     - name: Step 1 - Echo out a GitHub Actions Secret to the logs
       run: |
         echo "The GitHub Action Secret will be masked:  "
-        echo ${{ secrets.JWT_REFRESH_TOKEN}}
+        echo ${{secrets.JWT_REFRESH_TOKEN}}
         echo "Trick to echo GitHub Actions Secret:  "
-        echo ${{secrets.JWT_ACCESS_TOKEN}} | sed 's/./& /g' 
+        echo ${{secrets.JWT_ACCESS_TOKEN}} 
